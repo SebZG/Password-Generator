@@ -12,17 +12,27 @@ let uppercase;
 let numeric;
 let special;
 
+const PASSWORD_MIN_LENGTH = 8;
+const PASSWORD_MAX_LENGTH = 12;
+
 // Function to prompt user for password options
 function getPasswordOptions() {
-  passwordLength = prompt("Password length? (8-12)");
-  lowercase = prompt("Lowercase? (Y/N)").toLowerCase() === 'y';
-  uppercase = prompt("Uppercase? (Y/N)").toLowerCase() === 'y';
-  numeric = prompt("Numeric? (Y/N)").toLowerCase() === 'y';
-  special = prompt("Special Characters ($@%&*. etc) (Y/N)?").toLowerCase() === 'y';
+  let passwordLength = parseInt(prompt("Password length? (8-12)"), 10);
 
   // Validate password length
-  if (passwordLength < 8 || passwordLength > 12) {
-    alert("Password length must be between 8 and 12 characters.");
+  if (passwordLength < PASSWORD_MIN_LENGTH || passwordLength > PASSWORD_MAX_LENGTH) {
+    alert(`Password length must be between ${PASSWORD_MIN_LENGTH} and ${PASSWORD_MAX_LENGTH} characters.`);
+    return getPasswordOptions();
+  }
+
+  let lowercase = confirm("Include lowercase characters?");
+  let uppercase = confirm("Include uppercase characters?");
+  let numeric = confirm("Include numeric characters?");
+  let special = confirm("Include special characters ($@%&*. etc)?");
+
+  // Check if at least one character type is selected
+  if (!lowercase && !uppercase && !numeric && !special) {
+    alert("At least one character type must be selected.");
     return getPasswordOptions();
   }
 
@@ -80,7 +90,8 @@ function writePassword() {
   const password = generatePassword();
   const passwordText = document.querySelector('#password');
 
-  passwordText.textContent = password;
+  passwordText.value = password;
+  passwordText.focus();
 }
 
 // Add event listener to generate button
