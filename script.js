@@ -10,16 +10,16 @@ const MIN_LENGTH = 8;
 const MAX_LENGTH = 12;
 
 // Function to get password length and vaildation
-function getPasswordLength({ minLength = MIN_LENGTH, maxLength = MAX_LENGTH } = {}) {
+const getPasswordLength = ({ minLength = MIN_LENGTH, maxLength = MAX_LENGTH } = {}) => {
   let length;
   do {
     length = parseInt(prompt(`Password length? (${minLength}-${maxLength})`), 10);
   } while (length < minLength || length > maxLength);
 
   return length;
-}
+};
 
-function getPasswordOptions() {
+const getPasswordOptions = () => {
   const length = getPasswordLength();
   const lowercase = confirm("Include lowercase characters?");
   const uppercase = confirm("Include uppercase characters?");
@@ -37,12 +37,11 @@ function getPasswordOptions() {
 }
 
 // Function for getting a random element from an array
-function getRandomElement(arr) {
-  return arr[Math.floor(Math.random() * arr.length)];
-}
+const getRandomElement = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
 
 // Function to get users options
-function getSelectedOptions({ lowercase, uppercase, numeric, special }, { numeric: num, special: spec, lowercase: lower, uppercase: upper }) {
+const getSelectedOptions = ({ lowercase, uppercase, numeric, special }, { numeric: num, special: spec, lowercase: lower, uppercase: upper }) => {
   const selectedOptions = [];
 
   if (lowercase) selectedOptions.push(...lower);
@@ -54,7 +53,7 @@ function getSelectedOptions({ lowercase, uppercase, numeric, special }, { numeri
 }
 
 // function to generate password based on users options
-function generatePassword(passwordOptions, options) {
+const generatePassword = (passwordOptions, options) => {
   const selectedOptions = getSelectedOptions(passwordOptions, options);
   return Array.from({ length: passwordOptions.length }, () => getRandomElement(selectedOptions)).join('');
 }
@@ -63,7 +62,7 @@ function generatePassword(passwordOptions, options) {
 const generateBtn = document.querySelector('#generate');
 
 // Write password to the #password input
-function writePassword() {
+const writePassword = () => {
   const passwordOptions = getPasswordOptions();
   const password = generatePassword(passwordOptions, options);
   const passwordText = document.querySelector('#password');
