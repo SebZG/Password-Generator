@@ -11,11 +11,13 @@ const MAX_LENGTH = 12;
 
 // Function to get options
 const getPasswordOptions = () => {
+  // Get length and validation
   const length = parseInt(prompt(`Password length? (${MIN_LENGTH}-${MAX_LENGTH})`), 10);
   if (length < MIN_LENGTH || length > MAX_LENGTH) {
     alert(`Length must be between ${MIN_LENGTH}-${MAX_LENGTH}`);
     return getPasswordOptions();
   }
+  // Get rest of options
   const lowercase = confirm("Include lowercase characters?");
   const uppercase = confirm("Include uppercase characters?");
   const numeric = confirm("Include numeric characters?");
