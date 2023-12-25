@@ -131,6 +131,9 @@ button[disabled] {
 }
 
 @media (max-width: 500px) {
+  .card h2 {
+    text-align: center;
+  }
   .btn {
     font-size: 0.8rem;
   }
