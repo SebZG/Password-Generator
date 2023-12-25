@@ -9,18 +9,15 @@ const options = {
 const MIN_LENGTH = 8;
 const MAX_LENGTH = 12;
 
-// Function to get password length and vaildation
-const getPasswordLength = ({ minLength = MIN_LENGTH, maxLength = MAX_LENGTH } = {}) => {
-  let length;
-  do {
-    length = parseInt(prompt(`Password length? (${minLength}-${maxLength})`), 10);
-  } while (length < minLength || length > maxLength);
-
-  return length;
-};
-
+// Function to get options
 const getPasswordOptions = () => {
-  const length = getPasswordLength();
+  const length = (() => {
+    let value;
+    do {
+      value = parseInt(prompt(`Password length? (${MIN_LENGTH}-${MAX_LENGTH})`), 10);
+    } while (value < MIN_LENGTH || value > MAX_LENGTH);
+    return value;
+  })();
   const lowercase = confirm("Include lowercase characters?");
   const uppercase = confirm("Include uppercase characters?");
   const numeric = confirm("Include numeric characters?");
@@ -40,8 +37,10 @@ const getPasswordOptions = () => {
 const getRandomElement = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
 
-// Function to get users options
-const getSelectedOptions = ({ lowercase, uppercase, numeric, special }, { numeric: num, special: spec, lowercase: lower, uppercase: upper }) => {
+// Function to create users option array
+const getSelectedOptions = (passwordOptions, options) => {
+  const { lowercase, uppercase, numeric, special } = passwordOptions;
+  const { numeric: num, special: spec, lowercase: lower, uppercase: upper } = options;
   const selectedOptions = [];
 
   if (lowercase) selectedOptions.push(...lower);
@@ -53,10 +52,8 @@ const getSelectedOptions = ({ lowercase, uppercase, numeric, special }, { numeri
 }
 
 // function to generate password based on users options
-const generatePassword = (passwordOptions, options) => {
-  const selectedOptions = getSelectedOptions(passwordOptions, options);
-  return Array.from({ length: passwordOptions.length }, () => getRandomElement(selectedOptions)).join('');
-}
+const generatePassword = (length, selectedOptions) =>
+  Array.from({ length }, () => getRandomElement(selectedOptions)).join('');
 
 // Get references to the #generate element
 const generateBtn = document.querySelector('#generate');
@@ -64,7 +61,8 @@ const generateBtn = document.querySelector('#generate');
 // Write password to the #password input
 const writePassword = () => {
   const passwordOptions = getPasswordOptions();
-  const password = generatePassword(passwordOptions, options);
+  const selectedOptions = getSelectedOptions(passwordOptions, options);
+  const password = generatePassword(passwordOptions.length, selectedOptions);
   const passwordText = document.querySelector('#password');
 
   passwordText.value = password;
