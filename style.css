@@ -38,10 +38,6 @@
   color: var(--FONT-COLOR-SELECTION);
 }
 
-textarea:active {
-  user-select: all;
-}
-
 html,
 body,
 .wrapper {
