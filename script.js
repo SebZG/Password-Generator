@@ -5,27 +5,26 @@ const options = {
   uppercase: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 };
 
-// Declaring min/max lengths outside of getPasswordOptions() for dynamic use
-const MIN_LENGTH = 8;
-const MAX_LENGTH = 12;
-
 // Function to get options
 const getPasswordOptions = () => {
+  const MIN_LENGTH = 8;
+  const MAX_LENGTH = 50;
   // Get length and handle "Cancel"
-  const lengthInput = prompt(`Password length? (${MIN_LENGTH}-${MAX_LENGTH})`);
-  if (lengthInput === null) {
-    // User pressed "Cancel"
-    alert("Password generation canceled.");
-    return null;
-  }
+  let length;
+  do {
+    const lengthInput = window.prompt(`Password length? (${MIN_LENGTH}-${MAX_LENGTH})`);
+    if (lengthInput === null) {
+      alert("Password generation canceled.");
+      return null;
+    }
 
-  const length = parseInt(lengthInput, 10);
-
-  // Handle length validation
-  if (length < MIN_LENGTH || length > MAX_LENGTH) {
-    alert(`Length must be a valid number between ${MIN_LENGTH} and ${MAX_LENGTH}`);
-    return getPasswordOptions();
-  }
+    length = parseInt(lengthInput, 10);
+    console.log(length)
+    // Handle length validation
+    if (isNaN(length) || length < MIN_LENGTH || length > MAX_LENGTH) {
+      alert(`Length must be a valid number between ${MIN_LENGTH} and ${MAX_LENGTH}`);
+    }
+  } while (isNaN(length) || length < MIN_LENGTH || length > MAX_LENGTH);
 
   // Get rest of options
   const lowercase = confirm("Include lowercase characters?");
@@ -64,9 +63,11 @@ const getSelectedOptions = (passwordOptions, options) => {
 const generatePassword = (length, selectedOptions) =>
   Array.from({ length }, () => getRandomElement(selectedOptions)).join('');
 
+
 // Write password to the #password input
 const writePassword = () => {
   const passwordOptions = getPasswordOptions();
+  if (!passwordOptions) return; // Check if password generation was canceled
   const selectedOptions = getSelectedOptions(passwordOptions, options);
   const password = generatePassword(passwordOptions.length, selectedOptions);
   const passwordText = document.querySelector('#password');
