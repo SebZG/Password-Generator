@@ -11,12 +11,22 @@ const MAX_LENGTH = 12;
 
 // Function to get options
 const getPasswordOptions = () => {
-  // Get length and validation
-  const length = parseInt(prompt(`Password length? (${MIN_LENGTH}-${MAX_LENGTH})`), 10);
+  // Get length and handle "Cancel"
+  const lengthInput = prompt(`Password length? (${MIN_LENGTH}-${MAX_LENGTH})`);
+  if (lengthInput === null) {
+    // User pressed "Cancel"
+    alert("Password generation canceled.");
+    return null;
+  }
+
+  const length = parseInt(lengthInput, 10);
+
+  // Handle length validation
   if (length < MIN_LENGTH || length > MAX_LENGTH) {
-    alert(`Length must be between ${MIN_LENGTH}-${MAX_LENGTH}`);
+    alert(`Length must be a valid number between ${MIN_LENGTH} and ${MAX_LENGTH}`);
     return getPasswordOptions();
   }
+
   // Get rest of options
   const lowercase = confirm("Include lowercase characters?");
   const uppercase = confirm("Include uppercase characters?");
@@ -63,6 +73,8 @@ const writePassword = () => {
 
   passwordText.value = password;
   passwordText.focus();
+  passwordText.select();
+  alert("Password generated successfully!");
 }
 
 // Get references to the #generate element
