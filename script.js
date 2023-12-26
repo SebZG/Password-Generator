@@ -36,7 +36,6 @@ const getPasswordOptions = () => {
 // Function for getting a random element from an array
 const getRandomElement = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
-
 // Function to create users option array
 const getSelectedOptions = (passwordOptions, options) => {
   const { lowercase, uppercase, numeric, special } = passwordOptions;
@@ -55,9 +54,6 @@ const getSelectedOptions = (passwordOptions, options) => {
 const generatePassword = (length, selectedOptions) =>
   Array.from({ length }, () => getRandomElement(selectedOptions)).join('');
 
-// Get references to the #generate element
-const generateBtn = document.querySelector('#generate');
-
 // Write password to the #password input
 const writePassword = () => {
   const passwordOptions = getPasswordOptions();
@@ -69,6 +65,51 @@ const writePassword = () => {
   passwordText.focus();
 }
 
+// Get references to the #generate element
+const generateBtn = document.querySelector('#generate');
 // Add event listener to generate button
 generateBtn.addEventListener('click', writePassword);
 
+//! DARK-MODE LOGIC
+
+// Get references to the elements
+var darkBtn = document.getElementById("dark-btn");
+var sun = document.getElementById("sun");
+var moon = document.getElementById("moon");
+
+// Toggle function for button
+darkBtn.onclick = () => {
+  darkBtn.classList.toggle("dark-btn-on");
+  document.body.classList.toggle("dark-theme");
+
+  if (localStorage.getItem("theme") == "light") {
+    localStorage.setItem("theme", "dark");
+    sun.classList.add("d-none");
+    moon.classList.remove("d-none");
+
+  } else {
+    localStorage.setItem("theme", "light");
+    moon.classList.add("d-none");
+    sun.classList.remove("d-none");
+  }
+};
+
+// Logic for adding/removing classes on load
+if (localStorage.getItem("theme") == "light") {
+  darkBtn.classList.remove("dark-btn-on");
+  document.body.classList.remove("dark-theme");
+  moon.classList.add("d-none");
+  sun.classList.remove("d-none");
+}
+else if (localStorage.getItem("theme") == "dark") {
+  darkBtn.classList.add("dark-btn-on");
+  document.body.classList.add("dark-theme");
+  sun.classList.add("d-none");
+  moon.classList.remove("d-none");
+}
+else {
+  localStorage.setItem("theme", "dark");
+}
+
+// Get theme from local storage
+localStorage.getItem("theme");

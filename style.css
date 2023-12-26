@@ -1,31 +1,44 @@
+/*! RESET */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
-/* || VARIABLES */
+/*! || VARIABLES */
 
 :root {
-  /* COLORS */
+  /** COLORS */
+  --BG-BEFORE-AFTER-DARK-MODE: #333;
   --BG-BEFORE-AFTER: #e7e9eb;
+  --BG-BLACK-DARK-MODE: black;
   --BG-BLACK: #333;
   --BG-BUTTON: #af0808;
   --BG-COLOR-CARD: #ffffff;
   --BG-COLOR: #f9fbfd;
+  --BG-TEXTAREA: #e7e9eb;
+  --BORDER-COLOR-DARK-MODE: rgba(245, 245, 245, 0.5);
   --BORDER-COLOR: #c0c7cf;
+  --BOX-SHADOW-CARD-DARK-MODE: rgba(245, 245, 245, 0.2) 0px 2px 8px 0px;
+  --BOX-SHADOW-CARD: rgba(0, 0, 0, 0.15) 0px 2px 8px 0px;
   --FONT-COLOR-BUTTON: #ffffff;
+  --FONT-COLOR-DARK-MODE: whitesmoke;
+  --FONT-COLOR-SELECTION-DARK-MODE: #333;
+  --FONT-COLOR-SELECTION: #333;
+  --FONT-COLOR-TEXTAREA-PLACEHOLDER: #333;
+  --FONT-COLOR-TEXTAREA: #333;
   --FONT-COLOR: #3b4954;
   --SELECTION: turquoise;
-
 }
+
+/*! GENERAL  */
 
 ::selection {
   background-color: var(--SELECTION);
-  color: var(--FONT-COLOR);
+  color: var(--FONT-COLOR-SELECTION);
 }
 
-#password:active {
+textarea:active {
   user-select: all;
 }
 
@@ -40,39 +53,114 @@ body,
 body {
   font-family: sans-serif;
   background-color: var(--BG-COLOR);
+  color: var(--FONT-COLOR);
+  transition: all 0.3s ease-in-out;
 }
 
 .wrapper {
+  position: relative;
   padding-top: 30px;
   padding-left: 20px;
   padding-right: 20px;
+  padding-bottom: 35rem;
 }
 
+.wrapper h1 {
+  color: var(--FONT-COLOR);
+  transition: all 0.4s ease-in-out;
+}
+
+/*! DARK MODE BUTTON & COLORS  */
+
+.dark-theme {
+  --BG-BEFORE-AFTER: var(--BG-BEFORE-AFTER-DARK-MODE);
+  --BG-COLOR-CARD: var(--BG-BLACK-DARK-MODE);
+  --BG-COLOR: var(--BG-BLACK);
+  --BG-TEXTAREA: var(--BG-BLACK);
+  --BORDER-COLOR: VAR(--BORDER-COLOR-DARK-MODE);
+  --BOX-SHADOW-CARD: var(--BOX-SHADOW-CARD-DARK-MODE);
+  --FONT-COLOR-SELECTION: var(--FONT-COLOR-SELECTION-DARK-MODE);
+  --FONT-COLOR-TEXTAREA-PLACEHOLDER: var(--FONT-COLOR-DARK-MODE);
+  --FONT-COLOR-TEXTAREA: var(--FONT-COLOR-DARK-MODE);
+  --FONT-COLOR: var(--FONT-COLOR-DARK-MODE);
+}
+
+#dark-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #ccc;
+  width: 45px;
+  border-radius: 15px;
+  padding: 2px 3px;
+  cursor: pointer;
+  display: flex;
+  transition: padding-left 0.4s ease-in-out, background-color 1.5s ease-in-out;
+}
+
+#dark-btn span {
+  width: 18px;
+  height: 18px;
+  background-color: #fff;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+#dark-btn.dark-btn-on {
+  padding-left: 23px;
+  background-color: var(--BG-BLACK-DARK-MODE);
+}
+
+/*! DARK-MODE ICONS */
+
+.fa-solid {
+  color: var(--FONT-COLOR);
+  font-size: 1.5rem;
+  position: absolute;
+  top: 1.2rem;
+  right: 5rem;
+  transition: color 0.4s ease-in-out;
+}
+
+#sun.d-none {
+  display: none;
+}
+
+#moon.d-none {
+  display: none;
+}
+
+/*! CARD  */
+
 header {
+  margin-top: 3rem;
   text-align: center;
   padding: 20px;
   padding-top: 0px;
-  color: hsl(206, 17%, 28%);
+  color: var(--FONT-COLOR);
+  transition: color 0.4s ease-in-out;
 }
 
 .card {
   background-color: var(--BG-COLOR-CARD);
-  border-radius: 5px;
+  border-radius: 1rem;
   border-width: 1px;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px 0px;
+  box-shadow: var(--BOX-SHADOW-CARD);
   color: var(--FONT-COLOR);
   font-size: 18px;
   margin: 0 auto;
   max-width: 800px;
   padding: 30px 40px;
+  transition: background-color 0.4s ease-in-out, box-shadow 0.4s ease-in-out, color 0.4s ease-in-out;
 }
 
 .card-header::after {
   content: " ";
   display: block;
   width: 100%;
-  background: var(--BG-BEFORE-AFTER);
+  background-color: var(--BG-BEFORE-AFTER);
   height: 2px;
+  transition: background-color 0.4s ease-in-out;
 }
 
 .card-body {
@@ -87,8 +175,9 @@ header {
   content: " ";
   display: block;
   width: 100%;
-  background: var(--BG-BEFORE-AFTER);
+  background-color: var(--BG-BEFORE-AFTER);
   height: 2px;
+  transition: background-color 0.4s ease-in-out;
 }
 
 .card-footer::after {
@@ -125,7 +214,8 @@ button[disabled] {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  border: none;
+  background-color: var(--BG-TEXTAREA);
+  color: var(--FONT-COLOR);
   display: block;
   width: 100%;
   padding-top: 15px;
@@ -140,7 +230,19 @@ button[disabled] {
   border-radius: 6px;
   resize: none;
   overflow: hidden;
+  transition: background-color 0.4s ease-in-out;
 }
+
+#password::placeholder {
+  color: var(--FONT-COLOR-TEXTAREA-PLACEHOLDER);
+  transition: color 0.4s ease-in-out;
+}
+
+#password:focus {
+  transition: all 0.4s ease-in-out;
+}
+
+/*! MEDIA Q's  */
 
 @media (max-width: 690px) {
   .btn {
