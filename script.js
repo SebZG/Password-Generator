@@ -9,20 +9,23 @@ const options = {
 const getPasswordOptions = () => {
   const MIN_LENGTH = 8;
   const MAX_LENGTH = 50;
-  // Get length and handle "Cancel"
+
+  // Get length and handle "cancel"
   let length;
   do {
     const lengthInput = window.prompt(`Password length? (${MIN_LENGTH}-${MAX_LENGTH})`);
     if (lengthInput === null) {
       alert("Password generation canceled.");
-      return null;
+      console.log("Password generation canceled.");
+      return;
     }
 
     length = parseInt(lengthInput, 10);
-    console.log(length)
+
     // Handle length validation
     if (isNaN(length) || length < MIN_LENGTH || length > MAX_LENGTH) {
       alert(`Length must be a valid number between ${MIN_LENGTH} and ${MAX_LENGTH}`);
+      console.log(`Length must be a valid number between ${MIN_LENGTH} and ${MAX_LENGTH}.`);
     }
   } while (isNaN(length) || length < MIN_LENGTH || length > MAX_LENGTH);
 
@@ -35,6 +38,7 @@ const getPasswordOptions = () => {
   // Check if at least one character type is selected
   if (!lowercase && !uppercase && !numeric && !special) {
     alert("At least one character type must be selected.");
+    console.log("At least one character type must be selected.");
     return getPasswordOptions();
   }
 
@@ -63,13 +67,14 @@ const getSelectedOptions = (passwordOptions, options) => {
 const generatePassword = (length, selectedOptions) =>
   Array.from({ length }, () => getRandomElement(selectedOptions)).join('');
 
-
 // Write password to the #password input
 const writePassword = () => {
   const passwordOptions = getPasswordOptions();
   if (!passwordOptions) return; // Check if password generation was canceled
   const selectedOptions = getSelectedOptions(passwordOptions, options);
+  console.log("Password length: " + passwordOptions.length);
   const password = generatePassword(passwordOptions.length, selectedOptions);
+  console.log("Password: " + password);
   const passwordText = document.querySelector('#password');
 
   passwordText.value = password;
@@ -80,7 +85,7 @@ const writePassword = () => {
 
 // Get references to the #generate element
 const generateBtn = document.querySelector('#generate');
-// Add event listener to generate button
+// Add event listener to #generate button
 generateBtn.addEventListener('click', writePassword);
 
 //! DARK-MODE LOGIC
@@ -122,6 +127,10 @@ else if (localStorage.getItem("theme") == "dark") {
 }
 else {
   localStorage.setItem("theme", "dark");
+  darkBtn.classList.add("dark-btn-on");
+  document.body.classList.add("dark-theme");
+  sun.classList.add("d-none");
+  moon.classList.remove("d-none");
 }
 
 // Get theme from local storage
