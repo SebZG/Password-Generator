@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <title>Password Generator</title>
   <!-- CSS -->
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="./css/style.css" />
 </head>
 
 <body>
@@ -32,7 +32,7 @@
         <textarea readonly id="password" onclick="this.focus();this.select()" placeholder="Your Secure Password" aria-label="Generated Password"></textarea>
       </div>
       <div class="card-footer">
-        <button id="generate" class="btn" onclick="writePassword">Generate Password</button>
+        <button id="generate" class="btn" >Generate Password</button>
       </div>
     </div>
   </div>
@@ -40,7 +40,8 @@
   <!-- FONT AWESOME ICONS -->
   <script src="https://kit.fontawesome.com/c1bc576c12.js" crossorigin="anonymous"></script>
   <!-- JS -->
-  <script src="script.js"></script>
+  <script src="./js/darkMode.js"></script>
+  <script src="./js/generatePassword.js" type="module"></script>
 </body>
 
 </html>

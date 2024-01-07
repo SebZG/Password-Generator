@@ -11,16 +11,16 @@ Also has a dark-mode which uses local storage to store users preference.
 
 #### Generate password
 
-- Click the "Generate Password" button
-- Input a valid length
-- Choose from the given options - must choose at least 1
+- Click the "Generate Password" button.
+- Input a valid length.
+- Choose from the given options - must choose at least 1.
 - Your password will appear on the page for you to copy.
 - Clicking on the generated password will automatically select all for copying.
 
 #### Dark-Mode
 
-- Simply click on dark-mode button and will toggle between dark and light mode
-- Users preference is stored in local storage therefore will be remembered on next load/visit
+- Simply click on dark-mode button and will toggle between dark and light mode.
+- Users preference is stored in local storage therefore will be remembered on next load/visit.
 
 ##
 
