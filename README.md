@@ -14,8 +14,9 @@ Also has a dark-mode which uses local storage to store users preference.
 - Click the "Generate Password" button.
 - Input a valid length.
 - Choose from the given options - must choose at least 1.
-- Your password will appear on the page for you to copy.
-- Clicking on the generated password will automatically select all for copying.
+- Your password will appear highlighted and will be automatically copied to the clipboard.
+- Password is also given in the Console.
+- Clicking on the generated password again will automatically highlight password.
 
 #### Dark-Mode
 

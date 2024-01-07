@@ -20,7 +20,9 @@ const writePassword = () => {
   passwordText.value = password;
   passwordText.focus();
   passwordText.select();
-  alert("Password generated successfully!");
+  navigator.clipboard.writeText(passwordText.value);
+  
+  alert("Password generated successfully and copied to the clipboard!");
 }
 
 // Get references to the #generate element
