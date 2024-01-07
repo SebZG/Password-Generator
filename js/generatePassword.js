@@ -1,9 +1,9 @@
 import { options, getPasswordOptions, getSelectedOptions } from "./getOptions.js";
 
-// Function for getting a random element from an array
+// Get random element from an array
 const getRandomElement = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
-// function to generate password based on users options
+// Generate password based on users options
 const generatePassword = (length, selectedOptions) =>
   Array.from({ length }, () => getRandomElement(selectedOptions)).join('');
 

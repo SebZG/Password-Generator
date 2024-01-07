@@ -5,7 +5,7 @@ const options = {
   uppercase: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 };
 
-// Function to get options
+// Get options
 const getPasswordOptions = () => {
   const MIN_LENGTH = 8;
   const MAX_LENGTH = 50;
@@ -46,7 +46,7 @@ const getPasswordOptions = () => {
   return { length, lowercase, uppercase, numeric, special };
 }
 
-// Function to create users option array
+// Create users option array
 const getSelectedOptions = (passwordOptions, options) => {
   const { lowercase, uppercase, numeric, special } = passwordOptions;
   const { numeric: num, special: spec, lowercase: lower, uppercase: upper } = options;
