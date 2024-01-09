@@ -10,11 +10,10 @@ const generatePassword = (length, selectedOptions) =>
 // Write password to the #password input
 const writePassword = () => {
   const passwordOptions = getPasswordOptions();
-  if (!passwordOptions) return; // Check if password generation was canceled
   const selectedOptions = getSelectedOptions(passwordOptions, options);
   const password = generatePassword(passwordOptions.length, selectedOptions);
   const passwordText = document.querySelector('#password');
-  
+
   console.log("Password length: " + passwordOptions.length);
   console.log("Password: " + password);
 
