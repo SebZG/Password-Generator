@@ -8,7 +8,7 @@ const options = {
 // Get options
 const getPasswordOptions = () => {
   const MIN_LENGTH = 8;
-  const MAX_LENGTH = 50;
+  const MAX_LENGTH = 128;
 
   // Get length and handle "cancel"
   let length;
